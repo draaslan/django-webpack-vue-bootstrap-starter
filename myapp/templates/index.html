@@ -6,6 +6,7 @@
 
     </head>
     <body>
+        <div id="app">
         <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -43,11 +44,11 @@
 
           <div class="starter-template">
             <h1>Django + Webpack + Bootsrap + VueJS Starter</h1>
-            <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+            <div class="lead"><demo></demo></div>
           </div>
 
         </div><!-- /.container -->
-
-        <script type="text/javascript" href="{% static 'app.js' %}"></script>
+    </div>
+        <script type="text/javascript" src="{% static 'app.js' %}"></script>
     </body>
 </html>
