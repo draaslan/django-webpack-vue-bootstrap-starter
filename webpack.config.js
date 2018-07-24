@@ -1,41 +1,32 @@
 const path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: './assets/js/app.js',
+  entry: ['./assets/js/app.js', './assets/sass/app.scss'],
   output: {
     filename: 'app.js',
     path: path.resolve(__dirname, 'static')
   },
   module: {
-    rules: [
-      {
-        test: /\.(scss)$/,
-        use: [
-          {
-            // Adds CSS to the DOM by injecting a `<style>` tag
-            loader: 'style-loader'
-          },
-          {
-            // Interprets `@import` and `url()` like `import/require()` and will resolve them
-            loader: 'css-loader'
-          },
-          {
-            // Loader for webpack to process CSS with PostCSS
-            loader: 'postcss-loader',
-            options: {
-              plugins: function () {
-                return [
-                  require('autoprefixer')
-                ];
-              }
-            }
-          },
-          {
-            // Loads a SASS/SCSS file and compiles it to CSS
-            loader: 'sass-loader'
-          }
-        ]
-      }
-    ]
-  }
+      rules: [
+        /*
+        your other rules for JavaScript transpiling go in here
+        */
+        { // regular css files
+          test: /\.css$/,
+          loader: ExtractTextPlugin.extract({
+            use: 'css-loader?importLoaders=1',
+          }),
+        },
+        { // sass / scss loader for webpack
+          test: /\.(sass|scss)$/,
+          loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
+        }
+      ]
+  },
+  plugins: [
+      new ExtractTextPlugin({ // define where to save the file
+        filename: 'app.css'
+      }),
+    ],
 };
